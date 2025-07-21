@@ -50,6 +50,7 @@ pip install vllm -U
 pip install math_verify # reward function
 pip install sentence-transformers
 pip install "numpy<2.0" --upgrade
+pip install "opencv-python-headless<4.12.0"
 
 pip install huggingface_hub
 export HF_TOKEN=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
