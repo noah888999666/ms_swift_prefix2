@@ -57,7 +57,7 @@ huggingface-cli login --token $HF_TOKEN
 # local-dir=/home/aiscuser
 conda install -c conda-forge wandb --yes
 pip install pydantic --upgrade
-wandb login a0686d210ceba8f713f6cd85c5dcf3621b7f15e7
+wandb login 12889579b4a78319f80e202e35156aa0f1edd9e4
 
 
 ### single GPU
