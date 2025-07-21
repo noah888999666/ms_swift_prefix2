@@ -53,7 +53,7 @@ pip install "numpy<2.0" --upgrade
 pip install "opencv-python-headless<4.12.0"
 
 pip install huggingface_hub
-export HF_TOKEN=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
+export HF_TOKEN=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
 huggingface-cli login --token $HF_TOKEN
 # local-dir=/home/aiscuser
 conda install -c conda-forge wandb --yes
