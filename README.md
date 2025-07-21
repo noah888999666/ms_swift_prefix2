@@ -1,4 +1,105 @@
+# deploy
+```shell
+mkdir -p ~/miniconda3
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+rm ~/miniconda3/miniconda.sh
+source ~/miniconda3/bin/activate
+mkdir -p ~/miniconda3
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+rm ~/miniconda3/miniconda.sh
+export PATH="~/anaconda3/bin:$PATH"
+source ~/miniconda3/bin/activate
+conda init bash
+source ~/.bashrc
+
+wget https://developer.download.nvidia.com/compute/cuda/12.1.0/local_installers/cuda_12.1.0_530.30.02_linux.run
+sh cuda_12.1.0_530.30.02_linux.run
+
+conda create -n ms-swift-grpo python=3.10
+source activate ms-swift-grpo
+# conda install torch==2.6.0 torchvision==0.21.0
+# pip install git+https://github.com/huggingface/transformers@f3f6c86582611976e72be054675e2bf0abb5f775
+# pip install git+https://github.com/huggingface/transformers accelerate
+# pip install accelerate
+# pip install qwen-vl-utils
+# pip install -U flash-attn --no-build-isolation
+# pip install deepspeed==0.16.4 triton==3.0.0 
+# conda install -c huggingface datasets
+
+pip install ms-swift -U
+
+git clone https://github.com/noah888999666/ms_swift_prefix2.git
+cd ms_swift_prefix2
+pip install -e .
+pip install qwen-vl-utils[decord]
+pip install deepspeed
+conda install pytorch torchvision -c pytorch
+pip install wandb==0.15.4
+# pip uninstall -y trl numpy
+# pip install trl==0.16.1 numpy==1.26.4
+# pip install --root-user-action=ignore -i https://pypi.tuna.tsinghua.edu.cn/simple trl>=0.17.0
+pip uninstall -y numpy
+pip install numpy==1.26.4
+# pip uninstall numpy -y
+# pip install "numpy<2.0" --force-reinstall
+pip install "trl>=0.17.0"
+pip install datasets==3.0.0
+pip install vllm -U
+pip install math_verify # reward function
+pip install sentence-transformers
+pip install "numpy<2.0" --upgrade
+
+pip install huggingface_hub
+export HF_TOKEN=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
+huggingface-cli login --token $HF_TOKEN
+# local-dir=/home/aiscuser
+conda install -c conda-forge wandb --yes
+pip install pydantic --upgrade
+wandb login a0686d210ceba8f713f6cd85c5dcf3621b7f15e7
+
+
+### single GPU
+export RANK=0
+export WORLD_SIZE=1
+export MASTER_ADDR=localhost
+export MASTER_PORT=12355
+CUDA_VISIBLE_DEVICES=0 \
+swift sft \
+    --model Qwen/Qwen2.5-3B-Instruct \
+    --train_type lora \
+    --dataset 'swift/self-cognition#500' \
+    --dataset 'AI-ModelScope/sharegpt_gpt4#500' \
+    --torch_dtype bfloat16 \
+    --num_train_epochs 1 \
+    --per_device_train_batch_size 1 \
+    --per_device_eval_batch_size 1 \
+    --learning_rate 1e-4 \
+    --lora_rank 8 \
+    --lora_alpha 32 \
+    --target_modules all-linear \
+    --gradient_accumulation_steps 16 \
+    --eval_steps 50 \
+    --save_steps 50 \
+    --save_total_limit 2 \
+    --logging_steps 5 \
+    --max_length 2048 \
+    --output_dir output \
+    --system 'You are a helpful assistant.' \
+    --warmup_ratio 0.05 \
+    --dataloader_num_workers 4 \
+    --model_author swift \
+    --model_name swift-robot \
+    --gradient_checkpointing false
+```
+
+
+
+
 # SWIFT (Scalable lightWeight Infrastructure for Fine-Tuning)
+
+
 
 <p align="center">
     <br>
