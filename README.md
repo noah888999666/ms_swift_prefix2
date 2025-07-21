@@ -52,7 +52,7 @@ pip install sentence-transformers
 pip install "numpy<2.0" --upgrade
 
 pip install huggingface_hub
-export HF_TOKEN=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
+export HF_TOKEN=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
 huggingface-cli login --token $HF_TOKEN
 # local-dir=/home/aiscuser
 conda install -c conda-forge wandb --yes
