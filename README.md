@@ -52,9 +52,12 @@ pip install sentence-transformers
 pip install "numpy<2.0" --upgrade
 pip install "opencv-python-headless<4.12.0"
 
+
 pip install huggingface_hub
-export HF_TOKEN=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
-huggingface-cli login --token $HF_TOKEN
+huggingface-cli logout
+export HF_TOKEN=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
+git config --global credential.helper store
+huggingface-cli login --token $HF_TOKEN --add-to-git-credential
 # local-dir=/home/aiscuser
 conda install -c conda-forge wandb --yes
 pip install pydantic --upgrade
