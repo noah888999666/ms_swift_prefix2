@@ -54,8 +54,10 @@ pip install "opencv-python-headless<4.12.0"
 
 
 pip install huggingface_hub
-unset HF_TOKEN
-huggingface-cli login --token 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
+# unset HF_TOKEN
+# huggingface-cli login --token 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
+pip install -U huggingface_hub
+export HF_ENDPOINT=https://hf-mirror.com
 # local-dir=/home/aiscuser
 conda install -c conda-forge wandb --yes
 pip install pydantic --upgrade
